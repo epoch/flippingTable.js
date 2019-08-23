@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+
+    :root {
+      --ninja-font-size: 9vw;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      height: 70vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      animation-name: fadeIn;
+      animation-duration: 1.5s;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in;
+      animation-delay: 0.8s;
+      animation-fill-mode: both;
+    }
+
+    header {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .lift-counter {
+      color: gray;
+      padding: 1rem;
+      font-size: 2rem;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .ninja {
+      display: flex;
+      align-items: flex-end;
+      font-size: var(--ninja-font-size);
+      animation-duration: 0.7s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    .table {
+      font-size: var(--ninja-font-size);
+      font-weight: bold;
+      position: relative;
+      left: -4.2vw;
+      line-height: 1.1;
+      transition: all 0.12s ease-out;
+    }
+
+    .ninja:hover + .table-wrapper .table {
+      top: calc(var(--ninja-font-size) * -1);
+      animation-name: spin;
+      animation-duration: 0.7s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      transform-origin: center;
+    }
+
+    .ninja:hover {
+      animation-duration: 0.5;
+      animation-name: violent-shake;
+      animation-timing-function: cubic-bezier(.36,.07,.19,.97);
+    }
+
+    .ninja .arm {
+      transform: scaleY(-1);
+      transition: all 0.12s ease-out;
+    }
+
+    .arm.lift {
+      transform: scaleY(1);
+    }
+
+    .table.lift {
+      transform: translateY(calc(var(--ninja-font-size) * -1)); 
+    }
+
+    .ninja:hover .arm {
+      transform: scaleY(1);
+    }
+
+    .ninja:hover .mouth {
+      font-size: 8.2vw;
+    }
+
+    .shake {
+      animation-name: shake;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+    }
+
+    .floor {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 1.5rem;
+      color: gray;
+      flex-grow: 1;
+      border-top: 4px solid black;
+      animation-name: reveal;
+      animation-duration: 1.2s;
+      animation-iteration-count: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .eye {
+      animation-name: blink;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+
+    .struggle .eye {
+      font-size: 4.5vw;
+      letter-spacing: 0.5vw;
+      align-self: center;
+    }
+
+    .squint {
+      animation-name: squint;
+      animation-duration: 1s;
+      animation-timing-function: ease-in-out;
+    }
+
+    .hide {
+      visibility: hidden;
+    }
+
+    @keyframes squint {
+      10%, 90% {
+        transform: scale(1, 0.9);
+      }
+      
+      20%, 80% {
+        transform: scale(1, 0.9);
+      }
+
+      30%, 50%, 70% {
+        transform: scale(1, 0.85);
+      }
+
+      40%, 60% {
+        transform: scale(1, 0.9);
+      }
+    } 
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes reveal {
+      from { transform: scale(0, 1); }
+      to { transform: scale(1,1); }
+    }    
+
+    @keyframes blink {
+      92% { transform: scale(1, 1); }
+      96% { transform: scale(1.1, 0.1); }
+      100% { transform: scale(1, 1); }
+    }
+
+    @keyframes spin {
+      from {transform:rotate(0deg);}
+      to {transform:rotate(360deg);}
+    }
+
+    @keyframes shake {
+      10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      
+      20%, 80% {
+        transform: translate3d(1px, 0, 0);
+      }
+
+      30%, 50%, 70% {
+        transform: translate3d(-1px, 0, 0);
+      }
+
+      40%, 60% {
+        transform: translate3d(1px, 0, 0);
+      }
+    }     
+
+    @keyframes violent-shake {
+      10%, 90% {
+        transform: translate3d(-2px, 0, 0);
+      }
+      
+      20%, 80% {
+        transform: translate3d(2px, 0, 0);
+      }
+
+      30%, 50%, 70% {
+        transform: translate3d(-3px, 0, 0);
+      }
+
+      40%, 60% {
+        transform: translate3d(3px, 0, 0);
+      }
+    }    
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="lift-counter hide">0</div>
+  </header>
+  <main>
+    <div class="ninja">
+      <span class="body">(</span>
+      <div class="arm-wrapper">
+        <div class="arm arm-left">╯</div>
+      </div>
+      <span class="eye">･</span>
+      <span class="mouth">_</span>
+      <span class="eye">･</span>
+      <span class="body">)</span>
+      <div class="arm-wrapper">
+        <div class="arm arm-right">╯</div>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <div class="table">┳━┳</div>
+    </div>      
+  </main>
+  <div class="floor">
+    <p>press space to lift</p>
+  </div>
+
+  <script>
+    const ninja = document.querySelector('.ninja')
+    const eyes = ninja.querySelectorAll('.eye')
+    const arms = ninja.querySelectorAll('.arm')
+    const armRight = ninja.querySelector('.arm-right')
+    const armWrappers = ninja.querySelectorAll('.arm-wrapper')
+    const mouth = ninja.querySelector('.mouth')
+    const table = document.querySelector('.table')
+    const tableWrapper = document.querySelector('.table-wrapper')
+    const liftCounter = document.querySelector('.lift-counter')
+
+    let numberOfLifts = 0
+
+    const flipTable = event => {
+      eyes.forEach(eye => eye.textContent = '°')
+      mouth.textContent = 'Д'
+    }
+
+    const placeTable = event => {
+      eyes.forEach(eye => eye.textContent = '･')
+      mouth.textContent = '_'
+    }
+
+    window.addEventListener('keydown', event => {
+      if (event.code === "Space") { 
+        
+        if (table.classList.contains('lift')) {
+          ninja.classList.remove('struggle')
+          eyes.forEach(eye => eye.textContent = '･')
+          eyes.forEach(eye => eye.classList.remove('squint'))
+          table.classList.remove('lift')
+          arms.forEach(arm => arm.classList.remove('lift'))
+          tableWrapper.classList.remove('shake')  
+          armWrappers.forEach(arm => arm.classList.remove('shake'))
+          liftCounter.textContent = numberOfLifts
+          if (numberOfLifts > 0) {
+            liftCounter.classList.remove('hide')
+          }
+        } else {
+          numberOfLifts++
+          table.classList.add('lift')
+          arms.forEach(arm => arm.classList.add('lift'))
+
+          if (numberOfLifts > 5) {
+            ninja.classList.add('struggle')
+            tableWrapper.classList.add('shake') 
+            eyes.forEach(eye => eye.textContent = 'ರ')
+            armWrappers.forEach(arm => arm.classList.add('shake'))
+          }
+          if (numberOfLifts > 10) {
+            eyes.forEach(eye => eye.classList.add('squint'))
+          }
+        }
+      }
+    })
+
+    ninja.addEventListener('mouseover', flipTable)
+    ninja.addEventListener('mouseout', placeTable)
+  </script>
+</body>
+</html>
