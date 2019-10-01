@@ -15,6 +15,16 @@
       box-sizing: border-box;
     }
 
+    .table p {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      color: gray;
+      margin: 0;
+      font-size: 5vw;
+      position: relative;
+      bottom: -4vw;
+      text-align: center;
+    }
+
     body {
       margin: 0;
       height: 100vh;
@@ -240,11 +250,14 @@
       </div>
     </div>
     <div class="table-wrapper">
-      <div class="table">┳━┳</div>
+      <div class="table">
+        <p class="message"></p>
+        <div>┳━┳</div>
+      </div>
     </div>      
   </main>
   <div class="floor">
-    <p>press space to lift</p>
+      <p>Press space to lift. Hover on emoji to flip</p>
   </div>
 
   <script>
@@ -257,8 +270,30 @@
     const table = document.querySelector('.table')
     const tableWrapper = document.querySelector('.table-wrapper')
     const liftCounter = document.querySelector('.lift-counter')
+    const message = document.querySelector('.message')
 
     let numberOfLifts = 0
+
+    const params = decodeURI(window.location.search)
+      .replace('?', '')
+      .split('&')
+      .map(param => param.split('='))
+      .reduce((values, [ key, value ]) => {
+        values[ key ] = value
+        return values
+      }, {})
+
+    message.textContent = params.message
+
+    const render = () => {
+      if (app.isLifting) {
+
+      }
+    }
+
+    const liftTable = event => {
+      app.isLifting = true
+    }
 
     const flipTable = event => {
       eyes.forEach(eye => eye.textContent = '°')
@@ -296,7 +331,7 @@
             eyes.forEach(eye => eye.textContent = 'ರ')
             armWrappers.forEach(arm => arm.classList.add('shake'))
           }
-          if (numberOfLifts > 10) {
+          if (numberOfLifts > 8) {
             eyes.forEach(eye => eye.classList.add('squint'))
           }
         }
